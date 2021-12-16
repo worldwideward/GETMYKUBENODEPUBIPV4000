@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+
+  echo "Usage: MYKIP [ddg|dig|curl]"
+  echo ""
+  echo "ddg : use duckduckgo"
+  echo "dig : use opendns"
+  echo "ifc : use ifconfig.co"
+  echo ""
+  
+elif [ "$1" == "ddg" ]; then
+
+  curl -s "https://api.duckduckgo.com/?q=my+ip&format=json" -H "Accept: application/json" | jq ".Answer"
+
+elif [ "$1" == "dig" ]; then
+
+  dig +short myip.opendns.com @resolver1.opendns.com
+
+elif [ "$1" == "ifc" ]; then
+
+  curl ifconfig.co
+else
+  echo "choose one of ddg|dig|ifc"
+fi
+  
